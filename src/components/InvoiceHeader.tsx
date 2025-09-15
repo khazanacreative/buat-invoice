@@ -17,6 +17,10 @@ interface InvoiceHeaderProps {
   setTransactionId: (value: string) => void
   transactionDate: string
   setTransactionDate: (value: string) => void
+  bankAccounts: string[]   // ✅ array untuk rekening
+  setBankAccounts: (accounts: string[]) => void
+  notes: string
+  setNotes: (value: string) => void
 }
 
 export const InvoiceHeader = ({
@@ -34,6 +38,10 @@ export const InvoiceHeader = ({
   setTransactionId,
   transactionDate,
   setTransactionDate,
+  bankAccounts,
+  setBankAccounts,
+  notes,
+  setNotes,
 }: InvoiceHeaderProps) => {
   return (
     <div className="space-y-8">
@@ -59,7 +67,7 @@ export const InvoiceHeader = ({
         {/* Logo */}
         <div
           onClick={onLogoClick}
-          className="dashed-border w-1/3 sm:w-24 h-24 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
+          className="dashed-border w-24 h-24 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
         >
           {logo ? (
             <img src={logo} alt="Logo" className="w-full h-full object-contain" />
@@ -126,6 +134,42 @@ export const InvoiceHeader = ({
             />
           </div>
         </div>
+      </div>
+
+      {/* Bank Accounts */}
+      <div className="space-y-1 text-left">
+        {bankAccounts.map((acc, idx) =>
+          acc.trim() ? (
+            <div key={idx} className="flex items-center gap-2">
+              <span className="font-medium text-sm min-w-[100px]">Rekening {idx + 1}:</span>
+              <Input
+                value={acc}
+                onChange={(e) => {
+                  const updated = [...bankAccounts]
+                  updated[idx] = e.target.value
+                  setBankAccounts(updated)
+                }}
+                placeholder={`Nomor rekening ${idx + 1}`}
+                className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none 
+                          bg-transparent p-0 focus-visible:ring-0 
+                          focus-visible:border-invoice-primary flex-1"
+              />
+            </div>
+          ) : null
+        )}
+      </div>
+
+      {/* Notes (NB) */}
+      <div className="text-left">
+        <span className="font-medium text-sm block">NB:</span>
+        <Textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder="Catatan tambahan"
+          rows={3}
+          className="text-sm border-none border-b border-muted-foreground/30 rounded-none 
+                    bg-transparent p-0 focus-visible:ring-0 resize-none w-full"
+        />
       </div>
     </div>
   )
