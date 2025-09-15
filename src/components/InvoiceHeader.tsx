@@ -75,7 +75,7 @@ export const InvoiceHeader = ({
       {/* Customer and Transaction Details */}
       <div className="flex justify-between items-start">
         {/* Customer Details */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className="flex items-center gap-2">
             <span className="font-medium text-sm min-w-[120px]">Nama Pelanggan:</span>
             <Input
@@ -97,7 +97,7 @@ export const InvoiceHeader = ({
         </div>
 
         {/* Transaction Details */}
-        <div className="space-y-3 text-right">
+        <div className="space-y-2 text-right">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:justify-end">
             <span className="font-medium text-sm min-w-[100px]">No Transaksi:</span>
             <Input
@@ -112,7 +112,7 @@ export const InvoiceHeader = ({
               type="date"
               value={transactionDate}
               onChange={(e) => setTransactionDate(e.target.value)}
-              className="border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 sm:text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
+              className="border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 text-right sm:text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
             />
           </div>
         </div>
