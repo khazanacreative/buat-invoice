@@ -117,7 +117,7 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
 
         {/* Katalog Item - pindah ke sini */}
         {showAddForm && (
-          <div className="no-print bg-card border rounded-lg p-4 lg:p-6 mt-4">
+          <div className="no-print bg-card border rounded-lg p-4 lg:p-6 mt-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
               <h2 className="text-lg font-semibold">Tambah Item Baru</h2>
               <Button
