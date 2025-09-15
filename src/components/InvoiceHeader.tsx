@@ -37,10 +37,10 @@ export const InvoiceHeader = ({
 }: InvoiceHeaderProps) => {
   return (
     <div className="space-y-8">
-      {/* Company + Logo Row */}
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+      {/* Company and Logo Row */}
+      <div className="flex flex-col sm:flex-row justify-between items-start relative">
         {/* Company Info */}
-        <div className="space-y-2 w-full sm:w-1/3">
+        <div className="space-y-2 w-2/3 sm:w-1/3">
           <Input
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
@@ -59,7 +59,7 @@ export const InvoiceHeader = ({
         {/* Logo */}
         <div
           onClick={onLogoClick}
-          className="self-center sm:self-start ml-0 sm:ml-4 dashed-border w-24 h-24 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
+          className="dashed-border w-1/3 sm:w-24 h-24 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
         >
           {logo ? (
             <img src={logo} alt="Logo" className="w-full h-full object-contain" />
@@ -67,24 +67,26 @@ export const InvoiceHeader = ({
             <Upload className="w-6 h-6 text-muted-foreground" />
           )}
         </div>
-      </div>
 
-      {/* Invoice Title */}
-      <div className="flex justify-center">
-        <h1 className="text-3xl font-bold text-invoice-primary">INVOICE</h1>
+        {/* Invoice Title */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 top-28 sm:top-12">
+          <h1 className="text-3xl font-bold text-invoice-primary">INVOICE</h1>
+        </div>
       </div>
 
       {/* Customer and Transaction Details */}
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start">
         {/* Customer Details */}
-        <div className="space-y-1 w-full sm:w-1/2">
+        <div className="space-y-0.5 w-full sm:w-1/2">
           <div className="flex items-center gap-2">
             <span className="font-medium text-sm min-w-[120px]">Nama Pelanggan:</span>
             <Input
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
               placeholder="Masukkan nama pelanggan"
-              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary flex-1"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none 
+                        bg-transparent p-0 focus-visible:ring-0 
+                        focus-visible:border-invoice-primary flex-1"
             />
           </div>
           <div className="flex items-center gap-2">
@@ -93,35 +95,34 @@ export const InvoiceHeader = ({
               value={customerAddress}
               onChange={(e) => setCustomerAddress(e.target.value)}
               placeholder="Masukkan alamat pelanggan"
-              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary flex-1"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none 
+                        bg-transparent p-0 focus-visible:ring-0 
+                        focus-visible:border-invoice-primary flex-1"
             />
           </div>
         </div>
 
         {/* Transaction Details */}
-        <div className="space-y-1 w-full sm:w-1/2">
-          <div className="flex items-center justify-end gap-2">
-            <span className="font-medium text-sm">No Transaksi:</span>
+        <div className="space-y-0.5 w-full sm:w-1/2 text-left sm:text-right">
+          <div className="flex items-center sm:justify-end gap-2">
+            <span className="font-medium text-sm min-w-[100px]">No Transaksi:</span>
             <Input
               value={transactionId}
               onChange={(e) => setTransactionId(e.target.value)}
               className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none 
                         bg-transparent p-0 focus-visible:ring-0 
-                        focus-visible:border-invoice-primary 
-                        w-40 text-right"
+                        focus-visible:border-invoice-primary w-full sm:w-40 text-left sm:text-right"
             />
           </div>
-
-          <div className="flex items-center justify-end gap-2">
-            <span className="font-medium text-sm">Tanggal:</span>
+          <div className="flex items-center sm:justify-end gap-2">
+            <span className="font-medium text-sm min-w-[100px]">Tanggal:</span>
             <Input
               type="date"
               value={transactionDate}
               onChange={(e) => setTransactionDate(e.target.value)}
               className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none 
                         bg-transparent p-0 focus-visible:ring-0 
-                        focus-visible:border-invoice-primary 
-                        w-40 text-right appearance-none"
+                        focus-visible:border-invoice-primary w-full sm:w-40 text-left sm:text-right appearance-none"
             />
           </div>
         </div>
