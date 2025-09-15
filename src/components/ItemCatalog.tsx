@@ -5,9 +5,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Trash2, Plus, Package } from 'lucide-react';
+import { Upload, FileDown } from 'lucide-react';
 import { CatalogItem } from './InvoiceApp';
 import { useToast } from '@/hooks/use-toast';
 
+import * as XLSX from 'xlsx';
 interface ItemCatalogProps {
   items: CatalogItem[];
   onAddItem: (item: Omit<CatalogItem, 'id'>) => void;
@@ -50,6 +52,26 @@ export const ItemCatalog = ({ items, onAddItem, onDeleteItem }: ItemCatalogProps
     });
 
     // Reset form
+  
+      // Handler untuk import XLS
+      const handleImportXLS = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          const data = evt.target?.result;
+          if (!data) return;
+          const workbook = XLSX.read(data, { type: 'binary' });
+          const sheet = workbook.Sheets[workbook.SheetNames[0]];
+          const json = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+          // Format: [{ Nama, Deskripsi, Harga, Satuan }]
+          if (Array.isArray(json)) {
+            // @ts-ignore
+            onImportCatalog?.(json);
+          }
+        };
+        reader.readAsBinaryString(file);
+      };
     setName('');
     setPrice('');
     setDescription('');

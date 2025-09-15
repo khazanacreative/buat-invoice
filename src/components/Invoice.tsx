@@ -7,7 +7,43 @@ import { InvoiceTable } from './InvoiceTable';
 import { InvoiceFooter } from './InvoiceFooter';
 import { AddItemForm } from './AddItemForm';
 import { CatalogItem } from './InvoiceApp';
-import { Printer, Plus } from 'lucide-react';
+import { Printer, Plus, Share2 } from 'lucide-react';
+  // Share PDF handler
+  const handleSharePDF = async () => {
+    // Coba cari elemen invoice-container
+    const invoiceEl = document.querySelector('.invoice-container');
+    if (!invoiceEl) return alert('Invoice tidak ditemukan');
+    // Gunakan html2canvas dan jsPDF untuk generate PDF
+    try {
+      const html2canvas = (await import('html2canvas')).default;
+      const jsPDF = (await import('jspdf')).jsPDF;
+      const canvas = await html2canvas(invoiceEl);
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({ orientation: 'p', unit: 'pt', format: 'a4' });
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pageWidth;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      const blob = pdf.output('blob');
+      const file = new File([blob], 'invoice.pdf', { type: 'application/pdf' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: 'Invoice PDF', text: 'Berikut invoice Anda.' });
+      } else {
+        // fallback: download
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'invoice.pdf';
+        a.click();
+        URL.revokeObjectURL(url);
+        alert('Browser tidak mendukung share langsung. File PDF diunduh.');
+      }
+    } catch (err) {
+      alert('Gagal membuat PDF. Pastikan koneksi internet dan coba lagi.');
+    }
+  };
 import { useToast } from '@/hooks/use-toast';
 
 export interface InvoiceItem {
@@ -163,10 +199,16 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
           <Plus className="w-4 h-4 mr-2" />
           {showAddForm ? 'Tutup Form' : 'Tambah Item'}
         </Button>
-        <Button onClick={handlePrint} variant="outline">
-          <Printer className="w-4 h-4 mr-2" />
-          Cetak PDF
-        </Button>
+        <div className="flex flex-row gap-2 w-full sm:w-auto justify-center">
+          <Button onClick={handlePrint} variant="outline">
+            <Printer className="w-4 h-4 mr-2" />
+            Cetak PDF
+          </Button>
+          <Button onClick={handleSharePDF} variant="outline">
+            <Share2 className="w-4 h-4 mr-2" />
+            Share PDF
+          </Button>
+        </div>
       </div>
 
       {/* Hidden file inputs */}
