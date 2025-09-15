@@ -89,7 +89,7 @@ export const InvoiceFooter = ({
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Catatan tambahan..."
-            className="resize-none border-none bg-transparent p-1 focus-visible:ring-0 text-sm"
+            className={`resize-none border-none bg-transparent p-1 focus-visible:ring-0 text-sm${!notes ? ' print:hidden' : ''}`}
             rows={3}
           />
           {/* Tampilkan catatan di print hanya jika ada isinya */}
