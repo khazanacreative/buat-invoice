@@ -41,6 +41,9 @@
   color: #888;
 }
 
+/* =====================
+   Responsive Fix Mobile
+====================== */
 @media (max-width: 640px) {
   .invoice-info {
     grid-template-columns: 1fr; /* label dan input bertumpuk */
@@ -53,16 +56,6 @@
   }
 }
 
-@media (max-width: 640px) {
-  .company-logo {
-    width: 80px;
-    height: 80px;
-  }
-}
-
-/* =====================
-   Responsive Fix Mobile
-====================== */
 @media (max-width: 640px) {
   #root {
     padding-left: 1%;
@@ -127,18 +120,16 @@
   padding-right: 8px;
 }
 
+/* ==== Fix input date rata kanan ==== */
 .invoice-info input[type="date"] {
-  text-align: right;      /* teks di dalam box rata kanan */
-  justify-self: end;      /* kotak input rata kanan grid */
-  width: auto;            /* biar tidak penuh */
-  min-width: 140px;       /* opsional */
+  text-align: right;       /* isi teks rata kanan */
+  text-align-last: right;  /* fallback beberapa browser */
+  justify-self: end;       /* posisi input mepet ke kanan grid */
+  width: auto;             /* biar tidak penuh */
+  min-width: 140px;        /* opsional */
 }
-
-.invoice-info input[type="date"] {
-  text-align: right;   /* isi teks dalam kotak rata kanan */
-  justify-self: end;   /* posisi input mepet ke kanan kolom */
-  width: auto;         /* biar tidak penuh 100% */
-  min-width: 140px;    /* bisa disesuaikan */
+.invoice-info input[type="date"]::-webkit-datetime-edit {
+  text-align: right;
 }
 
 .invoice-info .inline-input {
@@ -148,4 +139,12 @@
 
 .invoice-container {
   padding: 0.5rem 1rem; /* lebih rapat, tidak terlalu longgar */
+}
+
+/* ==== Logo mobile 80x80 ==== */
+@media (max-width: 640px) {
+  .company-logo {
+    width: 80px !important;
+    height: 80px !important;
+  }
 }
