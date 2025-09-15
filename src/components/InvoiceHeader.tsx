@@ -96,8 +96,8 @@ export const InvoiceHeader = ({
               className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary"
             />
           </div>
-          {/* Transaction Details pindah ke bawah customer di mobile */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-2">
+          {/* Transaction Details sejajar label dan input di mobile */}
+          <div className="flex items-center gap-2 mt-2">
             <span className="font-medium text-sm min-w-[100px]">No Transaksi:</span>
             <Input
               value={transactionId}
@@ -105,7 +105,7 @@ export const InvoiceHeader = ({
               className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
             />
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-1">
+          <div className="flex items-center gap-2 mt-1">
             <span className="font-medium text-sm min-w-[100px]">Tanggal:</span>
             <Input
               type="date"
