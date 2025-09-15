@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        ubuntu: ['Ubuntu', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -47,15 +50,19 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        invoice: {
+          primary: "hsl(var(--invoice-primary))",
+          "primary-foreground": "hsl(var(--invoice-primary-foreground))",
+          secondary: "hsl(var(--invoice-secondary))",
+          accent: "hsl(var(--invoice-accent))",
+          "table-header": "hsl(var(--invoice-table-header))",
+          "table-row-even": "hsl(var(--invoice-table-row-even))",
+          "table-row-odd": "hsl(var(--invoice-table-row-odd))",
+          border: "hsl(var(--invoice-border))",
         },
       },
       borderRadius: {
