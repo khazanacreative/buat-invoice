@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+/* =====================
+   Responsive Fix Mobile
+====================== */
+@media (max-width: 640px) {
+  #root {
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+
+  .invoice-container {
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+}
