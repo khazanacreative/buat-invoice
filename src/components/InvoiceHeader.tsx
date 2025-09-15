@@ -17,8 +17,8 @@ interface InvoiceHeaderProps {
   setTransactionId: (value: string) => void
   transactionDate: string
   setTransactionDate: (value: string) => void
-  bankAccounts: string[]   // ✅ array untuk rekening
-  setBankAccounts: (accounts: string[]) => void
+  bankAccounts: string[]
+  setBankAccounts: (value: string[]) => void
   notes: string
   setNotes: (value: string) => void
 }
