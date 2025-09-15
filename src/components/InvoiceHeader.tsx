@@ -75,9 +75,9 @@ export const InvoiceHeader = ({
       </div>
 
       {/* Customer and Transaction Details */}
-      <div className="flex justify-between items-start">
-        {/* Customer Details */}
-        <div className="space-y-1">
+      <div className="flex flex-col sm:flex-row sm:justify-between items-start gap-4">
+        {/* Kiri: Customer Details dan Transaction Details (mobile: vertikal, desktop: kiri) */}
+        <div className="space-y-1 w-full sm:w-1/2">
           <div className="flex items-center gap-2">
             <span className="font-medium text-sm min-w-[120px]">Nama Pelanggan:</span>
             <Input
@@ -96,28 +96,26 @@ export const InvoiceHeader = ({
               className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary"
             />
           </div>
-        </div>
-
-        {/* Transaction Details */}
-        <div className="space-y-1 text-right">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:justify-end">
+          {/* Transaction Details pindah ke bawah customer di mobile */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-2">
             <span className="font-medium text-sm min-w-[100px]">No Transaksi:</span>
             <Input
               value={transactionId}
               onChange={(e) => setTransactionId(e.target.value)}
-              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
             />
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:justify-end">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-1">
             <span className="font-medium text-sm min-w-[100px]">Tanggal:</span>
             <Input
               type="date"
               value={transactionDate}
               onChange={(e) => setTransactionDate(e.target.value)}
-              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
             />
           </div>
         </div>
+        {/* (Jika ingin ada kolom kanan lain di desktop, tambahkan di sini) */}
       </div>
     </div>
   )
