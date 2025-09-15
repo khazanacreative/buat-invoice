@@ -77,14 +77,14 @@ export const InvoiceFooter = ({
       <div className="flex flex-col items-center space-y-2">
         <div
           onClick={onSignatureClick}
-          className="dashed-border w-32 h-20 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
+          className="dashed-border w-28 h-16 lg:w-32 lg:h-20 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
         >
           {signature ? (
             <img src={signature} alt="Signature" className="w-full h-full object-contain" />
           ) : (
-            <div className="text-center">
-              <Upload className="w-4 h-4 text-muted-foreground mx-auto mb-1" />
-              <span className="text-xs text-muted-foreground">Klik untuk upload tanda tangan</span>
+            <div className="text-center px-2">
+              <Upload className="w-3 h-3 lg:w-4 lg:h-4 text-muted-foreground mx-auto mb-1" />
+              <span className="text-xs text-muted-foreground leading-tight">Klik untuk upload tanda tangan</span>
             </div>
           )}
         </div>
@@ -92,7 +92,7 @@ export const InvoiceFooter = ({
           value={signatureName}
           onChange={(e) => setSignatureName(e.target.value)}
           placeholder="Nama penandatangan"
-          className="text-center border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 text-sm focus-visible:ring-0 focus-visible:border-invoice-primary"
+          className="text-center border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 text-sm focus-visible:ring-0 focus-visible:border-invoice-primary w-full max-w-[150px]"
         />
       </div>
     </div>

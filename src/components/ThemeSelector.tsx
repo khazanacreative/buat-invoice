@@ -17,13 +17,13 @@ const themes = [
 
 export const ThemeSelector = ({ currentTheme, onThemeChange }: ThemeSelectorProps) => {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
       <span className="text-sm font-medium text-foreground">Tema Branding:</span>
       <Select value={currentTheme} onValueChange={onThemeChange}>
         <SelectTrigger className="w-48">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-card border border-invoice-border">
           {themes.map((theme) => (
             <SelectItem key={theme.value} value={theme.value}>
               <div className="flex items-center gap-2">

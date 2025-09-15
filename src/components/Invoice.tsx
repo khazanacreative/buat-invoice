@@ -6,6 +6,7 @@ import { InvoiceHeader } from './InvoiceHeader';
 import { InvoiceTable } from './InvoiceTable';
 import { InvoiceFooter } from './InvoiceFooter';
 import { AddItemForm } from './AddItemForm';
+import { CatalogItem } from './InvoiceApp';
 import { Printer, Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -18,7 +19,7 @@ export interface InvoiceItem {
   description?: string;
 }
 
-export const Invoice = () => {
+export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
   const { toast } = useToast();
   const [companyName, setCompanyName] = useState('');
   const [companyAddress, setCompanyAddress] = useState('');
@@ -89,19 +90,19 @@ export const Invoice = () => {
     <div className="space-y-6">
       {/* Add Item Form - Only show when toggled */}
       {showAddForm && (
-        <div className="no-print bg-card border rounded-lg p-6">
-          <div className="flex justify-between items-center mb-4">
+        <div className="no-print bg-card border rounded-lg p-4 lg:p-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
             <h2 className="text-lg font-semibold">Tambah Item Baru</h2>
             <Button variant="outline" size="sm" onClick={() => setShowAddForm(false)}>
               Tutup
             </Button>
           </div>
-          <AddItemForm onAddItem={handleAddItem} />
+          <AddItemForm onAddItem={handleAddItem} catalogItems={catalogItems} />
         </div>
       )}
 
       {/* Invoice Container */}
-      <div className="invoice-container bg-card border-2 border-invoice-border rounded-lg p-8 max-w-4xl mx-auto relative">
+      <div className="invoice-container bg-card border-2 border-invoice-border rounded-lg p-4 lg:p-8 max-w-4xl mx-auto relative overflow-x-auto">
         <InvoiceHeader
           companyName={companyName}
           setCompanyName={setCompanyName}
@@ -138,7 +139,7 @@ export const Invoice = () => {
       </div>
 
       {/* Action Buttons */}
-      <div className="no-print flex justify-center gap-4">
+      <div className="no-print flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
         <Button
           onClick={() => setShowAddForm(!showAddForm)}
           className="bg-success hover:bg-success/90 text-success-foreground"
