@@ -122,7 +122,6 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
               </div>
             )}
 
-
         <InvoiceFooter
           bankName={bankName}
           setBankName={setBankName}
