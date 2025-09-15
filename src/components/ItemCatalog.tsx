@@ -23,9 +23,37 @@ export const ItemCatalog = ({ items, onAddItem, onDeleteItem }: ItemCatalogProps
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
 
+  // Handler untuk import XLS
+  const handleImportXLS = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      const data = evt.target?.result;
+      if (!data) return;
+      const workbook = XLSX.read(data, { type: 'binary' });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const json = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+      // Format: [{ Nama, Deskripsi, Harga, Satuan }]
+      if (Array.isArray(json)) {
+        // @ts-ignore
+        onAddItem && json.forEach((row: any) => {
+          if (row.Nama && row.Harga) {
+            onAddItem({
+              name: row.Nama,
+              price: Number(row.Harga),
+              description: row.Deskripsi || '',
+              unit: row.Satuan || '',
+            });
+          }
+        });
+      }
+    };
+    reader.readAsBinaryString(file);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!name || !price) {
       toast({
         title: "Data tidak lengkap",
@@ -34,7 +62,6 @@ export const ItemCatalog = ({ items, onAddItem, onDeleteItem }: ItemCatalogProps
       });
       return;
     }
-
     const priceNum = parseFloat(price);
     if (isNaN(priceNum) || priceNum <= 0) {
       toast({
@@ -44,39 +71,15 @@ export const ItemCatalog = ({ items, onAddItem, onDeleteItem }: ItemCatalogProps
       });
       return;
     }
-
     onAddItem({
       name,
       price: priceNum,
       description: description || undefined,
     });
-
-    // Reset form
-  
-      // Handler untuk import XLS
-      const handleImportXLS = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (evt) => {
-          const data = evt.target?.result;
-          if (!data) return;
-          const workbook = XLSX.read(data, { type: 'binary' });
-          const sheet = workbook.Sheets[workbook.SheetNames[0]];
-          const json = XLSX.utils.sheet_to_json(sheet, { defval: '' });
-          // Format: [{ Nama, Deskripsi, Harga, Satuan }]
-          if (Array.isArray(json)) {
-            // @ts-ignore
-            onImportCatalog?.(json);
-          }
-        };
-        reader.readAsBinaryString(file);
-      };
     setName('');
     setPrice('');
     setDescription('');
     setShowForm(false);
-    
     toast({
       title: "Item ditambahkan",
       description: "Item berhasil ditambahkan ke katalog",
@@ -112,6 +115,27 @@ export const ItemCatalog = ({ items, onAddItem, onDeleteItem }: ItemCatalogProps
             <Plus className="w-4 h-4 mr-2" />
             {showForm ? 'Tutup' : 'Tambah Item'}
           </Button>
+        </div>
+        {/* Tombol download dan upload template XLS */}
+        <div className="flex flex-row gap-2 mt-4">
+          <a href="/katalog-template.xlsx" download>
+            <Button variant="outline" size="sm">
+              <FileDown className="w-4 h-4 mr-1" /> Download Template XLS
+            </Button>
+          </a>
+          <label className="inline-flex items-center cursor-pointer">
+            <input
+              type="file"
+              accept=".xls,.xlsx"
+              className="hidden"
+              onChange={handleImportXLS}
+            />
+            <Button asChild variant="outline" size="sm">
+              <span>
+                <Upload className="w-4 h-4 mr-1" /> Import XLS
+              </span>
+            </Button>
+          </label>
         </div>
       </CardHeader>
       
