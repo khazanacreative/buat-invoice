@@ -38,7 +38,7 @@ export const InvoiceFooter = ({
             <strong>NB:</strong> Silahkan melakukan pembayaran melalui transfer ke:
           </p>
           {bankAccounts.map((acc, idx) => (
-            <div key={idx} className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm mb-2 w-full">
+            <div key={idx} className="flex flex-row flex-wrap sm:flex-row sm:items-center gap-1 text-sm mb-[0.7em] w-full">
               <Input
                 value={acc.bankName}
                 onChange={e => {
@@ -47,7 +47,7 @@ export const InvoiceFooter = ({
                   setBankAccounts(updated);
                 }}
                 placeholder="Bank"
-                className="w-full sm:w-20 border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+                className="flex-1 min-w-0 sm:w-20 border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
               />
               <Input
                 value={acc.accountNumber}
@@ -57,9 +57,9 @@ export const InvoiceFooter = ({
                   setBankAccounts(updated);
                 }}
                 placeholder="No. Rek."
-                className="w-full sm:w-auto border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+                className="flex-1 min-w-0 sm:w-auto border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
               />
-              <span className="hidden sm:inline">a.n.</span>
+              <span className="mx-1">a.n.</span>
               <Input
                 value={acc.accountHolder}
                 onChange={e => {
@@ -68,7 +68,7 @@ export const InvoiceFooter = ({
                   setBankAccounts(updated);
                 }}
                 placeholder="Nama Pemilik"
-                className="w-full sm:w-auto border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+                className="flex-1 min-w-0 sm:w-auto border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
               />
               {bankAccounts.length > 1 && (
                 <button type="button" className="text-xs text-red-500 ml-2" onClick={() => setBankAccounts(bankAccounts.filter((_, i) => i !== idx))}>Hapus</button>
@@ -92,6 +92,12 @@ export const InvoiceFooter = ({
             className="resize-none border-none bg-transparent p-1 focus-visible:ring-0 text-sm"
             rows={3}
           />
+          {/* Tampilkan catatan di print hanya jika ada isinya */}
+          {notes && (
+            <div className="hidden print:block mt-2 text-sm">
+              <strong>Catatan:</strong> {notes}
+            </div>
+          )}
         </div>
       </div>
 

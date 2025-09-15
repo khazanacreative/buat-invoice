@@ -27,7 +27,11 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
   const [customerAddress, setCustomerAddress] = useState('');
   const [transactionId, setTransactionId] = useState('02/INV/JAN/2025');
   const [transactionDate, setTransactionDate] = useState(new Date().toISOString().split('T')[0]);
-  const [bankAccounts, setBankAccounts] = useState([
+  const [bankAccounts, setBankAccounts] = useState<{
+    bankName: string;
+    accountNumber: string;
+    accountHolder: string;
+  }[]>([
     { bankName: '', accountNumber: '', accountHolder: '' }
   ]);
   const [notes, setNotes] = useState('');
@@ -87,9 +91,9 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
   const totalAmount = items.reduce((sum, item) => sum + item.total, 0);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Invoice Container */}
-      <div className="invoice-container bg-card border-2 border-invoice-border rounded-lg p-4 lg:p-8 max-w-4xl mx-auto relative overflow-x-auto">
+      <div className="invoice-container bg-card border-2 border-invoice-border rounded-lg p-2 lg:p-4 max-w-4xl mx-auto relative overflow-x-auto">
         {/* Header */}
         <InvoiceHeader
           companyName={companyName}
@@ -109,11 +113,13 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
         />
 
         {/* Tabel Invoice */}
-        <InvoiceTable
-          items={items}
-          onDeleteItem={handleDeleteItem}
-          totalAmount={totalAmount}
-        />
+        <div className="pt-2 lg:pt-3">
+          <InvoiceTable
+            items={items}
+            onDeleteItem={handleDeleteItem}
+            totalAmount={totalAmount}
+          />
+        </div>
 
         {/* Katalog Item - pindah ke sini */}
         {showAddForm && (
