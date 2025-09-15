@@ -57,7 +57,7 @@ export const InvoiceHeader = ({
         {/* Logo */}
         <div
           onClick={onLogoClick}
-          className="dashed-border w-24 h-16 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
+          className="dashed-border w-24 h-24 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
         >
           {logo ? (
             <img src={logo} alt="Logo" className="w-full h-full object-contain" />
