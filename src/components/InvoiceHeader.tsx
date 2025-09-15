@@ -100,19 +100,20 @@ export const InvoiceHeader = ({
 
         {/* Transaction Details */}
         <div className="space-y-1 w-full sm:w-1/2">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <span className="font-medium text-sm sm:min-w-[120px]">No Transaksi:</span>
+          <div className="flex items-center justify-end gap-2">
+            <span className="font-medium text-sm">No Transaksi:</span>
             <Input
               value={transactionId}
               onChange={(e) => setTransactionId(e.target.value)}
               className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none 
                         bg-transparent p-0 focus-visible:ring-0 
                         focus-visible:border-invoice-primary 
-                        w-full sm:w-40 text-left sm:text-right"
+                        w-40 text-right"
             />
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <span className="font-medium text-sm sm:min-w-[120px]">Tanggal:</span>
+
+          <div className="flex items-center justify-end gap-2">
+            <span className="font-medium text-sm">Tanggal:</span>
             <Input
               type="date"
               value={transactionDate}
@@ -120,7 +121,7 @@ export const InvoiceHeader = ({
               className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none 
                         bg-transparent p-0 focus-visible:ring-0 
                         focus-visible:border-invoice-primary 
-                        w-full sm:w-40 text-left sm:text-right"
+                        w-40 text-right appearance-none"
             />
           </div>
         </div>
