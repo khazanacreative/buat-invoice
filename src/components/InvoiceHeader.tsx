@@ -36,11 +36,11 @@ export const InvoiceHeader = ({
   setTransactionDate,
 }: InvoiceHeaderProps) => {
   return (
-    <div className="space-y-8 relative">
+    <div className="space-y-8">
       {/* Company + Logo Row */}
       <div className="flex justify-between items-start">
         {/* Company Info */}
-        <div className="space-y-2 w-full sm:w-1/2 lg:w-1/3">
+        <div className="space-y-2 w-1/3">
           <Input
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
@@ -69,8 +69,8 @@ export const InvoiceHeader = ({
         </div>
       </div>
 
-      {/* Invoice Title - centered */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 top-12">
+      {/* Invoice Title (dipindah ke bawah alamat, di atas customer) */}
+      <div className="flex justify-center">
         <h1 className="text-3xl font-bold text-invoice-primary">INVOICE</h1>
       </div>
 
