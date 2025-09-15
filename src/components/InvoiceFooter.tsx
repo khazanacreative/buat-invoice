@@ -2,13 +2,15 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Upload } from 'lucide-react';
 
-interface InvoiceFooterProps {
+interface BankAccount {
   bankName: string;
-  setBankName: (value: string) => void;
   accountNumber: string;
-  setAccountNumber: (value: string) => void;
   accountHolder: string;
-  setAccountHolder: (value: string) => void;
+}
+
+interface InvoiceFooterProps {
+  bankAccounts: BankAccount[];
+  setBankAccounts: (accounts: BankAccount[]) => void;
   notes: string;
   setNotes: (value: string) => void;
   signature: string | null;
@@ -18,12 +20,8 @@ interface InvoiceFooterProps {
 }
 
 export const InvoiceFooter = ({
-  bankName,
-  setBankName,
-  accountNumber,
-  setAccountNumber,
-  accountHolder,
-  setAccountHolder,
+  bankAccounts,
+  setBankAccounts,
   notes,
   setNotes,
   signature,
@@ -32,34 +30,58 @@ export const InvoiceFooter = ({
   setSignatureName,
 }: InvoiceFooterProps) => {
   return (
-    <div className="flex justify-between items-start gap-8 mt-8">
+  <div className="flex flex-col sm:flex-row justify-between items-start gap-8 mt-8">
       {/* Notes Section */}
       <div className="flex-1 space-y-4">
         <div>
           <p className="font-medium text-sm mb-2">
             <strong>NB:</strong> Silahkan melakukan pembayaran melalui transfer ke:
           </p>
-          <div className="flex items-center gap-2 text-sm">
-            <Input
-              value={bankName}
-              onChange={(e) => setBankName(e.target.value)}
-              placeholder="Bank"
-              className="w-20 border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
-            />
-            <Input
-              value={accountNumber}
-              onChange={(e) => setAccountNumber(e.target.value)}
-              placeholder="No. Rek."
-              className="border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
-            />
-            <span>a.n.</span>
-            <Input
-              value={accountHolder}
-              onChange={(e) => setAccountHolder(e.target.value)}
-              placeholder="Nama Pemilik"
-              className="border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
-            />
-          </div>
+          {bankAccounts.map((acc, idx) => (
+            <div key={idx} className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm mb-2 w-full">
+              <Input
+                value={acc.bankName}
+                onChange={e => {
+                  const updated = [...bankAccounts];
+                  updated[idx].bankName = e.target.value;
+                  setBankAccounts(updated);
+                }}
+                placeholder="Bank"
+                className="w-full sm:w-20 border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+              />
+              <Input
+                value={acc.accountNumber}
+                onChange={e => {
+                  const updated = [...bankAccounts];
+                  updated[idx].accountNumber = e.target.value;
+                  setBankAccounts(updated);
+                }}
+                placeholder="No. Rek."
+                className="w-full sm:w-auto border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+              />
+              <span className="hidden sm:inline">a.n.</span>
+              <Input
+                value={acc.accountHolder}
+                onChange={e => {
+                  const updated = [...bankAccounts];
+                  updated[idx].accountHolder = e.target.value;
+                  setBankAccounts(updated);
+                }}
+                placeholder="Nama Pemilik"
+                className="w-full sm:w-auto border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+              />
+              {bankAccounts.length > 1 && (
+                <button type="button" className="text-xs text-red-500 ml-2" onClick={() => setBankAccounts(bankAccounts.filter((_, i) => i !== idx))}>Hapus</button>
+              )}
+            </div>
+          ))}
+          <button
+            type="button"
+            className="text-xs text-blue-600 mt-1"
+            onClick={() => setBankAccounts([...bankAccounts, { bankName: '', accountNumber: '', accountHolder: '' }])}
+          >
+            + Tambah Rekening
+          </button>
         </div>
         
         <div>
@@ -73,8 +95,8 @@ export const InvoiceFooter = ({
         </div>
       </div>
 
-      {/* Signature Section */}
-      <div className="flex flex-col items-center space-y-2">
+  {/* Signature Section */}
+  <div className="flex flex-col items-center space-y-2 mt-6 sm:mt-0 w-full sm:w-auto">
         <div
           onClick={onSignatureClick}
           className="dashed-border w-28 h-16 lg:w-32 lg:h-20 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"

@@ -27,9 +27,9 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
   const [customerAddress, setCustomerAddress] = useState('');
   const [transactionId, setTransactionId] = useState('02/INV/JAN/2025');
   const [transactionDate, setTransactionDate] = useState(new Date().toISOString().split('T')[0]);
-  const [bankName, setBankName] = useState('');
-  const [accountNumber, setAccountNumber] = useState('');
-  const [accountHolder, setAccountHolder] = useState('');
+  const [bankAccounts, setBankAccounts] = useState([
+    { bankName: '', accountNumber: '', accountHolder: '' }
+  ]);
   const [notes, setNotes] = useState('');
   const [signatureName, setSignatureName] = useState('');
   const [logo, setLogo] = useState<string | null>(null);
@@ -137,12 +137,8 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
 
         {/* Footer */}
         <InvoiceFooter
-          bankName={bankName}
-          setBankName={setBankName}
-          accountNumber={accountNumber}
-          setAccountNumber={setAccountNumber}
-          accountHolder={accountHolder}
-          setAccountHolder={setAccountHolder}
+          bankAccounts={bankAccounts}
+          setBankAccounts={setBankAccounts}
           notes={notes}
           setNotes={setNotes}
           signature={signature}
