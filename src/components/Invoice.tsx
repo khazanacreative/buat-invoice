@@ -37,8 +37,6 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
   const [items, setItems] = useState<InvoiceItem[]>([]);
   const [showAddForm, setShowAddForm] = useState(false);
 
-  const [bankAccounts, setBankAccounts] = useState<string[]>(["", "", ""]);
-
   const logoInputRef = useRef<HTMLInputElement>(null);
   const signatureInputRef = useRef<HTMLInputElement>(null);
 
@@ -120,10 +118,6 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
           setTransactionId={setTransactionId}
           transactionDate={transactionDate}
           setTransactionDate={setTransactionDate}
-          bankAccounts={bankAccounts}              // ✅ baru
-          setBankAccounts={setBankAccounts}        // ✅ baru
-          notes={notes}                            // ✅ baru
-          setNotes={setNotes}                      // ✅ baru
         />
 
         <InvoiceTable items={items} onDeleteItem={handleDeleteItem} totalAmount={totalAmount} />
