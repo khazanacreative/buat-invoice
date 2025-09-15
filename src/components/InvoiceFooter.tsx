@@ -99,7 +99,7 @@ export const InvoiceFooter = ({
   <div className="flex flex-col items-center space-y-2 mt-6 sm:mt-0 w-full sm:w-auto">
         <div
           onClick={onSignatureClick}
-          className="dashed-border w-28 h-16 lg:w-32 lg:h-20 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors no-print"
+          className="dashed-border w-28 h-16 lg:w-32 lg:h-20 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
         >
           {signature ? (
             <img src={signature} alt="Signature" className="w-full h-full object-contain" />
