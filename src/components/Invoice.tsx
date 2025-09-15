@@ -88,19 +88,6 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
 
   return (
     <div className="space-y-6">
-      {/* Add Item Form - Only show when toggled */}
-      {showAddForm && (
-        <div className="no-print bg-card border rounded-lg p-4 lg:p-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
-            <h2 className="text-lg font-semibold">Tambah Item Baru</h2>
-            <Button variant="outline" size="sm" onClick={() => setShowAddForm(false)}>
-              Tutup
-            </Button>
-          </div>
-          <AddItemForm onAddItem={handleAddItem} catalogItems={catalogItems} />
-        </div>
-      )}
-
       {/* Invoice Container */}
       <div className="invoice-container bg-card border-2 border-invoice-border rounded-lg p-4 lg:p-8 max-w-4xl mx-auto relative overflow-x-auto">
         <InvoiceHeader
@@ -121,6 +108,20 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
         />
 
         <InvoiceTable items={items} onDeleteItem={handleDeleteItem} totalAmount={totalAmount} />
+
+      {/* Add Item Form - Only show when toggled */}
+            {showAddForm && (
+              <div className="no-print bg-card border rounded-lg p-4 lg:p-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+                  <h2 className="text-lg font-semibold">Tambah Item Baru</h2>
+                  <Button variant="outline" size="sm" onClick={() => setShowAddForm(false)}>
+                    Tutup
+                  </Button>
+                </div>
+                <AddItemForm onAddItem={handleAddItem} catalogItems={catalogItems} />
+              </div>
+            )}
+
 
         <InvoiceFooter
           bankName={bankName}
