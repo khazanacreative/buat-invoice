@@ -40,7 +40,7 @@ export const InvoiceHeader = ({
       {/* Company + Logo Row */}
       <div className="flex justify-between items-start">
         {/* Company Info */}
-        <div className="space-y-2 flex-1">
+        <div className="space-y-2 w-full sm:w-1/2 lg:w-1/3">
           <Input
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
@@ -84,7 +84,7 @@ export const InvoiceHeader = ({
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
               placeholder="Masukkan nama pelanggan"
-              className="border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary"
             />
           </div>
           <div className="flex items-center gap-2">
@@ -93,7 +93,7 @@ export const InvoiceHeader = ({
               value={customerAddress}
               onChange={(e) => setCustomerAddress(e.target.value)}
               placeholder="Masukkan alamat pelanggan"
-              className="border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary"
             />
           </div>
         </div>
@@ -105,7 +105,7 @@ export const InvoiceHeader = ({
             <Input
               value={transactionId}
               onChange={(e) => setTransactionId(e.target.value)}
-              className="border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 sm:text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
             />
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:justify-end">
@@ -114,7 +114,7 @@ export const InvoiceHeader = ({
               type="date"
               value={transactionDate}
               onChange={(e) => setTransactionDate(e.target.value)}
-              className="border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 text-right sm:text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
             />
           </div>
         </div>
