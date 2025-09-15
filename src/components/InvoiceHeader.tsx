@@ -40,7 +40,7 @@ export const InvoiceHeader = ({
       {/* Company + Logo Row */}
       <div className="flex justify-between items-start">
         {/* Company Info */}
-        <div className="space-y-2 w-1/3">
+        <div className="space-y-2 w-3/5">
           <Input
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
