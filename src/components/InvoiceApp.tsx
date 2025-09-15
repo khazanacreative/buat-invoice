@@ -42,12 +42,12 @@ const InvoiceApp = () => {
       
       <main className="container mx-auto py-4 lg:py-8 px-4">
         <div className="space-y-6">
+          <Invoice catalogItems={catalogItems} />
           <ItemCatalog 
             items={catalogItems}
             onAddItem={addCatalogItem}
             onDeleteItem={deleteCatalogItem}
           />
-          <Invoice catalogItems={catalogItems} />
         </div>
       </main>
     </div>
