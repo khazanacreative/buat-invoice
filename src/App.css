@@ -83,8 +83,7 @@
 
 .invoice-info {
   display: grid;
-  grid-template-columns: 120px auto;
-  row-gap: 4px;
+  grid-template-columns: 120px 1fr; /* label + input */
   align-items: center;
 }
 
@@ -94,11 +93,18 @@
   padding-right: 8px;
 }
 
-.invoice-info input {
-  padding: 4px 6px;
-  font-size: 14px;
-  width: 100%;
-  box-sizing: border-box;
+.invoice-info input[type="date"] {
+  text-align: right;      /* teks di dalam box rata kanan */
+  justify-self: end;      /* kotak input rata kanan grid */
+  width: auto;            /* biar tidak penuh */
+  min-width: 140px;       /* opsional */
+}
+
+.invoice-info input[type="date"] {
+  text-align: right;   /* isi teks dalam kotak rata kanan */
+  justify-self: end;   /* posisi input mepet ke kanan kolom */
+  width: auto;         /* biar tidak penuh 100% */
+  min-width: 140px;    /* bisa disesuaikan */
 }
 
 .invoice-info .inline-input {
