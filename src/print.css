@@ -1,0 +1,33 @@
+/* Print Styles */
+@media print {
+  /* Pastikan warna tema tetap tampil saat print */
+  .print-theme {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Warna tema biru */
+  .print-theme.blue * {
+    color-adjust: exact !important;
+  }
+
+  /* Warna tema hijau */
+  .print-theme.green * {
+    color-adjust: exact !important;
+  }
+
+  /* Warna tema ungu */
+  .print-theme.purple * {
+    color-adjust: exact !important;
+  }
+
+  /* Warna tema merah */
+  .print-theme.red * {
+    color-adjust: exact !important;
+  }
+
+  /* Warna tema oranye */
+  .print-theme.orange * {
+    color-adjust: exact !important;
+  }
+}
