@@ -58,7 +58,14 @@
     --theme-red-accent: 0 84% 85%;
     --theme-red-table-header: 0 84% 60%;
     --theme-red-table-even: 0 84% 97%;
-       
+    
+    /* Theme variants - Classic Navy */
+    --theme-navy-primary: 221 83% 53%;
+    --theme-navy-secondary: 221 83% 95%;
+    --theme-navy-accent: 221 83% 85%;
+    --theme-navy-table-header: 221 83% 53%;
+    --theme-navy-table-even: 221 83% 97%;
+    
     /* Theme variants - Creative Orange */
     --theme-orange-primary: 25 95% 53%;
     --theme-orange-secondary: 25 95% 95%;
@@ -114,6 +121,14 @@
     --invoice-accent: 0 84% 85%;
     --invoice-table-header: 0 84% 60%;
     --invoice-table-row-even: 0 84% 97%;
+  }
+
+  body .theme-navy {
+    --invoice-primary: 221 83% 53%;
+    --invoice-secondary: 221 83% 95%;
+    --invoice-accent: 221 83% 85%;
+    --invoice-table-header: 221 83% 53%;
+    --invoice-table-row-even: 221 83% 97%;
   }
 
   body .theme-orange {

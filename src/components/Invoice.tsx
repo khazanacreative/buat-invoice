@@ -1,50 +1,13 @@
-import { useState, useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { InvoiceHeader } from './InvoiceHeader';
-import { InvoiceTable } from './InvoiceTable';
-import { InvoiceFooter } from './InvoiceFooter';
-import { AddItemForm } from './AddItemForm';
-import { CatalogItem } from './InvoiceApp';
-import { Printer, Plus, Share2 } from 'lucide-react';
-  // Share PDF handler  
-  const handleSharePDF = async () => {
-    // Coba cari elemen invoice-container
-    const invoiceEl = document.querySelector('.invoice-container') as HTMLElement;
-    if (!invoiceEl) return alert('Invoice tidak ditemukan');
-    // Gunakan html2canvas dan jsPDF untuk generate PDF
-    try {
-      const html2canvas = (await import('html2canvas')).default;
-      const jsPDF = (await import('jspdf')).jsPDF;
-      const canvas = await html2canvas(invoiceEl);
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({ orientation: 'p', unit: 'pt', format: 'a4' });
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pageWidth;
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      const blob = pdf.output('blob');
-      const file = new File([blob], 'invoice.pdf', { type: 'application/pdf' });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({ files: [file], title: 'Invoice PDF', text: 'Berikut invoice Anda.' });
-      } else {
-        // fallback: download
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'invoice.pdf';
-        a.click();
-        URL.revokeObjectURL(url);
-        alert('Browser tidak mendukung share langsung. File PDF diunduh.');
-      }
-    } catch (err) {
-      alert('Gagal membuat PDF. Pastikan koneksi internet dan coba lagi.');
-    }
-  };
-import { useToast } from '@/hooks/use-toast';
+// Invoice.tsx
+import { useState, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { InvoiceHeader } from "./InvoiceHeader";
+import { InvoiceTable } from "./InvoiceTable";
+import { InvoiceFooter } from "./InvoiceFooter";
+import { AddItemForm } from "./AddItemForm";
+import { CatalogItem, ThemeStyle } from "./InvoiceApp";
+import { Printer, Plus, Share2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export interface InvoiceItem {
   id: string;
@@ -55,32 +18,40 @@ export interface InvoiceItem {
   description?: string;
 }
 
-export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
+interface InvoiceProps {
+  catalogItems: CatalogItem[];
+  themeStyle: ThemeStyle;
+}
+
+export const Invoice: React.FC<InvoiceProps> = ({ catalogItems, themeStyle }) => {
   const { toast } = useToast();
-  const [companyName, setCompanyName] = useState('');
-  const [companyAddress, setCompanyAddress] = useState('');
-  const [customerName, setCustomerName] = useState('');
-  const [customerAddress, setCustomerAddress] = useState('');
-  const [transactionId, setTransactionId] = useState('02/INV/JAN/2025');
-  const [transactionDate, setTransactionDate] = useState(new Date().toISOString().split('T')[0]);
-  const [bankAccounts, setBankAccounts] = useState<{
-    bankName: string;
-    accountNumber: string;
-    accountHolder: string;
-  }[]>([
-    { bankName: '', accountNumber: '', accountHolder: '' }
-  ]);
-  const [notes, setNotes] = useState('');
-  const [signatureName, setSignatureName] = useState('');
+
+  // State
+  const [themeColor, setThemeColor] = useState("#3b82f6"); // default biru Tailwind
+  const [companyName, setCompanyName] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [customerAddress, setCustomerAddress] = useState("");
+  const [transactionId, setTransactionId] = useState("02/INV/JAN/2025");
+  const [transactionDate, setTransactionDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
+  const [bankAccounts, setBankAccounts] = useState<
+    { bankName: string; accountNumber: string; accountHolder: string }[]
+  >([{ bankName: "", accountNumber: "", accountHolder: "" }]);
+  const [notes, setNotes] = useState("");
+  const [signatureName, setSignatureName] = useState("");
   const [logo, setLogo] = useState<string | null>(null);
   const [signature, setSignature] = useState<string | null>(null);
   const [items, setItems] = useState<InvoiceItem[]>([]);
   const [showAddForm, setShowAddForm] = useState(false);
 
+  // Refs
   const logoInputRef = useRef<HTMLInputElement>(null);
   const signatureInputRef = useRef<HTMLInputElement>(null);
 
-  const handleAddItem = (item: Omit<InvoiceItem, 'id'>) => {
+  // Handlers
+  const handleAddItem = (item: Omit<InvoiceItem, "id">) => {
     const newItem: InvoiceItem = {
       ...item,
       id: Date.now().toString(),
@@ -95,7 +66,7 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
   };
 
   const handleDeleteItem = (id: string) => {
-    setItems(items.filter(item => item.id !== id));
+    setItems(items.filter((item) => item.id !== id));
     toast({
       title: "Item dihapus",
       description: "Item berhasil dihapus dari invoice",
@@ -124,6 +95,46 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
     }
   };
 
+  const handleSharePDF = async () => {
+    const invoiceEl = document.querySelector(
+      ".invoice-container"
+    ) as HTMLElement;
+    if (!invoiceEl) return alert("Invoice tidak ditemukan");
+
+    try {
+      const html2canvas = (await import("html2canvas")).default;
+      const jsPDF = (await import("jspdf")).jsPDF;
+      const canvas = await html2canvas(invoiceEl);
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF({ orientation: "p", unit: "pt", format: "a4" });
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfHeight = (imgProps.height * pageWidth) / imgProps.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pageWidth, pdfHeight);
+
+      const blob = pdf.output("blob");
+      const file = new File([blob], "invoice.pdf", { type: "application/pdf" });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: "Invoice PDF",
+          text: "Berikut invoice Anda.",
+        });
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "invoice.pdf";
+        a.click();
+        URL.revokeObjectURL(url);
+        alert("Browser tidak mendukung share langsung. File PDF diunduh.");
+      }
+    } catch (err) {
+      alert("Gagal membuat PDF. Pastikan koneksi internet dan coba lagi.");
+    }
+  };
+
   const totalAmount = items.reduce((sum, item) => sum + item.total, 0);
 
   return (
@@ -146,18 +157,38 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
           setTransactionId={setTransactionId}
           transactionDate={transactionDate}
           setTransactionDate={setTransactionDate}
+          themeColor={themeColor}
         />
 
-        {/* Tabel Invoice */}
+        {/* Table */}
         <div className="pt-2 lg:pt-3">
           <InvoiceTable
             items={items}
             onDeleteItem={handleDeleteItem}
             totalAmount={totalAmount}
+            themeColor={themeColor}
           />
         </div>
 
-        {/* Katalog Item - pindah ke sini */}
+        {/* Grand Total */}
+        <div
+          className={`mt-4 p-3 font-bold text-right ${themeStyle.grandTotalBg}`}
+        >
+          Grand Total:{" "}
+          {catalogItems.reduce((sum, i) => sum + i.price, 0).toLocaleString()}
+        </div>
+
+        {/* Color Picker */}
+        <div className="no-print flex justify-center mt-4">
+          <input
+            type="color"
+            value={themeColor}
+            onChange={(e) => setThemeColor(e.target.value)}
+            className="w-12 h-8 cursor-pointer"
+          />
+        </div>
+
+        {/* Add Item Form */}
         {showAddForm && (
           <div className="no-print bg-card border rounded-lg p-4 lg:p-6 mt-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
@@ -170,10 +201,7 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
                 Tutup
               </Button>
             </div>
-            <AddItemForm
-              onAddItem={handleAddItem}
-              catalogItems={catalogItems}
-            />
+            <AddItemForm onAddItem={handleAddItem} catalogItems={catalogItems} />
           </div>
         )}
 
@@ -190,14 +218,14 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
         />
       </div>
 
-      {/* Tombol Aksi */}
+      {/* Action Buttons */}
       <div className="no-print flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
         <Button
           onClick={() => setShowAddForm(!showAddForm)}
           className="bg-success hover:bg-success/90 text-success-foreground"
         >
           <Plus className="w-4 h-4 mr-2" />
-          {showAddForm ? 'Tutup Form' : 'Tambah Item'}
+          {showAddForm ? "Tutup Form" : "Tambah Item"}
         </Button>
         <div className="flex flex-row gap-2 w-full sm:w-auto justify-center">
           <Button onClick={handlePrint} variant="outline">
