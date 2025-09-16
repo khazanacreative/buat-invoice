@@ -131,7 +131,7 @@ export const ItemCatalog = ({ items, onAddItem, onDeleteItem, onAddMultipleItems
           <div>
             <CardTitle className="flex items-center gap-2 text-lg">
               <Package className="w-5 h-5 text-invoice-primary" />
-              Katalog Item
+              Katalog
             </CardTitle>
             <CardDescription>
               Kelola daftar barang/jasa untuk mempercepat pembuatan invoice
