@@ -12,6 +12,16 @@ export interface CatalogItem {
   description?: string;
 }
 
+// ⬇️ TARUH MAPPING DI SINI
+const themeClasses: Record<Theme, string> = {
+  blue: "bg-blue-50 text-blue-900",
+  green: "bg-green-50 text-green-900",
+  purple: "bg-purple-50 text-purple-900",
+  red: "bg-red-50 text-red-900",
+  navy: "bg-blue-900 text-white",
+  orange: "bg-orange-50 text-orange-900",
+};
+
 const InvoiceApp = () => {
   const [currentTheme, setCurrentTheme] = useState<Theme>('blue');
   const [catalogItems, setCatalogItems] = useState<CatalogItem[]>([]);
@@ -37,7 +47,7 @@ const InvoiceApp = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-background theme-${currentTheme}`}>
+    <div className={`min-h-screen ${themeClasses[currentTheme]}`}>
       <header className="no-print bg-card border-b p-3 lg:p-4">
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
