@@ -8,10 +8,10 @@ import { InvoiceFooter } from './InvoiceFooter';
 import { AddItemForm } from './AddItemForm';
 import { CatalogItem } from './InvoiceApp';
 import { Printer, Plus, Share2 } from 'lucide-react';
-  // Share PDF handler
+  // Share PDF handler  
   const handleSharePDF = async () => {
     // Coba cari elemen invoice-container
-    const invoiceEl = document.querySelector('.invoice-container');
+    const invoiceEl = document.querySelector('.invoice-container') as HTMLElement;
     if (!invoiceEl) return alert('Invoice tidak ditemukan');
     // Gunakan html2canvas dan jsPDF untuk generate PDF
     try {

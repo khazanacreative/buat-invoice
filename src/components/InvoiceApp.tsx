@@ -45,9 +45,8 @@ const InvoiceApp = () => {
           <Invoice catalogItems={catalogItems} />
           <ItemCatalog
             items={catalogItems}
-            onAddItem={handleAddItem}
-            onDeleteItem={handleDeleteItem}
-            onImportCatalog={handleImportCatalog}
+            onAddItem={addCatalogItem}
+            onDeleteItem={deleteCatalogItem}
           />
         </div>
       </main>

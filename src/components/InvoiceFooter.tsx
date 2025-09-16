@@ -38,7 +38,7 @@ export const InvoiceFooter = ({
             <strong>NB:</strong> Silahkan melakukan pembayaran melalui transfer ke:
           </p>
           {bankAccounts.map((acc, idx) => (
-            <div key={idx} className="flex flex-row flex-wrap sm:flex-row sm:items-center gap-1 text-sm mb-[0.7em] w-full">
+            <div key={idx} className="flex flex-row flex-wrap sm:flex-row sm:items-center gap-1 text-sm mb-2 w-full">
               <Input
                 value={acc.bankName}
                 onChange={e => {
@@ -105,7 +105,7 @@ export const InvoiceFooter = ({
   <div className="flex flex-col items-center space-y-2 mt-6 sm:mt-0 w-full sm:w-auto">
         <div
           onClick={onSignatureClick}
-          className="dashed-border w-28 h-16 lg:w-32 lg:h-20 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
+          className="dashed-border w-24 h-16 lg:w-36 lg:h-24 border-2 border-dashed border-muted-foreground/30 rounded-md cursor-pointer bg-muted/50 flex items-center justify-center overflow-hidden hover:bg-muted/70 transition-colors"
         >
           {signature ? (
             <img src={signature} alt="Signature" className="w-full h-full object-contain" />

@@ -27,29 +27,57 @@ export const ItemCatalog = ({ items, onAddItem, onDeleteItem }: ItemCatalogProps
   const handleImportXLS = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    
     const reader = new FileReader();
     reader.onload = (evt) => {
       const data = evt.target?.result;
       if (!data) return;
-      const workbook = XLSX.read(data, { type: 'binary' });
-      const sheet = workbook.Sheets[workbook.SheetNames[0]];
-      const json = XLSX.utils.sheet_to_json(sheet, { defval: '' });
-      // Format: [{ Nama, Deskripsi, Harga, Satuan }]
-      if (Array.isArray(json)) {
-        // @ts-ignore
-        onAddItem && json.forEach((row: any) => {
-          if (row.Nama && row.Harga) {
-            onAddItem({
-              name: row.Nama,
-              price: Number(row.Harga),
-              description: row.Deskripsi || '',
-              unit: row.Satuan || '',
+      
+      try {
+        const workbook = XLSX.read(data, { type: 'binary' });
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const json = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+        
+        // Format: [{ Nama, Deskripsi, Harga }]
+        if (Array.isArray(json)) {
+          let importedCount = 0;
+          // @ts-ignore
+          json.forEach((row: any) => {
+            if (row.Nama && row.Harga) {
+              onAddItem({
+                name: row.Nama,
+                price: Number(row.Harga),
+                description: row.Deskripsi || '',
+              });
+              importedCount++;
+            }
+          });
+          
+          if (importedCount > 0) {
+            toast({
+              title: "Import berhasil",
+              description: `${importedCount} item berhasil diimpor dari Excel`,
+            });
+          } else {
+            toast({
+              title: "Tidak ada item yang diimpor",
+              description: "Pastikan file Excel memiliki kolom Nama dan Harga",
+              variant: "destructive",
             });
           }
+        }
+      } catch (error) {
+        toast({
+          title: "Gagal import file",
+          description: "File Excel tidak valid atau rusak",
+          variant: "destructive",
         });
       }
     };
     reader.readAsBinaryString(file);
+    
+    // Reset input
+    e.target.value = '';
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -118,11 +146,38 @@ export const ItemCatalog = ({ items, onAddItem, onDeleteItem }: ItemCatalogProps
         </div>
         {/* Tombol download dan upload template XLS */}
         <div className="flex flex-row gap-2 mt-4">
-          <a href="/katalog-template.xlsx" download>
-            <Button variant="outline" size="sm">
-              <FileDown className="w-4 h-4 mr-1" /> Download Template XLS
-            </Button>
-          </a>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => {
+              // Create Excel template dynamically
+              const templateData = [
+                { Nama: 'Konsultasi IT', Deskripsi: 'Layanan konsultasi teknologi informasi', Harga: 500000 },
+                { Nama: 'Website Development', Deskripsi: 'Pembuatan website profesional', Harga: 2000000 },
+                { Nama: 'Mobile App', Deskripsi: 'Pengembangan aplikasi mobile', Harga: 5000000 }
+              ];
+              
+              const wb = XLSX.utils.book_new();
+              const ws = XLSX.utils.json_to_sheet(templateData);
+              
+              // Set column widths
+              ws['!cols'] = [
+                { wch: 25 }, // Nama
+                { wch: 40 }, // Deskripsi  
+                { wch: 15 }  // Harga
+              ];
+              
+              XLSX.utils.book_append_sheet(wb, ws, 'Katalog Item');
+              XLSX.writeFile(wb, 'katalog-template.xlsx');
+              
+              toast({
+                title: "Template diunduh",
+                description: "File template Excel berhasil diunduh",
+              });
+            }}
+          >
+            <FileDown className="w-4 h-4 mr-1" /> Download Template XLS
+          </Button>
           <label className="inline-flex items-center cursor-pointer">
             <input
               type="file"
