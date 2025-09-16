@@ -6,7 +6,7 @@ import { InvoiceHeader } from './InvoiceHeader';
 import { InvoiceTable } from './InvoiceTable';
 import { InvoiceFooter } from './InvoiceFooter';
 import { AddItemForm } from './AddItemForm';
-import { CatalogItem } from './InvoiceApp';
+import { CatalogItem, ThemeStyle } from "./InvoiceApp";
 import { Printer, Plus, Share2 } from 'lucide-react';
   // Share PDF handler  
   const handleSharePDF = async () => {
@@ -46,6 +46,11 @@ import { Printer, Plus, Share2 } from 'lucide-react';
   };
 import { useToast } from '@/hooks/use-toast';
 
+interface InvoiceProps {
+  catalogItems: CatalogItem[];
+  themeStyle: ThemeStyle; // ← ini wajib ada
+}
+
 export interface InvoiceItem {
   id: string;
   name: string;
@@ -55,7 +60,7 @@ export interface InvoiceItem {
   description?: string;
 }
 
-export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
+export const Invoice: React.FC<InvoiceProps> = ({ catalogItems, themeStyle }) => {
   const { toast } = useToast();
   const [companyName, setCompanyName] = useState('');
   const [companyAddress, setCompanyAddress] = useState('');

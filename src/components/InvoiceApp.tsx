@@ -3,7 +3,7 @@ import { Invoice } from './Invoice';
 import { ThemeSelector } from './ThemeSelector';
 import { ItemCatalog } from './ItemCatalog';
 
-export type Theme = 'blue' | 'green' | 'purple' | 'red' | 'navy' | 'orange';
+export type Theme = 'blue' | 'green' | 'purple' | 'red' | 'orange';
 
 export interface CatalogItem {
   id: string;
@@ -12,15 +12,61 @@ export interface CatalogItem {
   description?: string;
 }
 
+export interface ThemeStyle {
+  logoText: string;
+  tableHeaderBg: string;
+  grandTotalBg: string;
+}
+
+export const themeStyles: Record<Theme, ThemeStyle> = {
+  blue: {
+    logoText: "text-blue-600",
+    tableHeaderBg: "bg-blue-500 text-white",
+    grandTotalBg: "bg-blue-100 text-blue-900",
+  },
+  green: {
+    logoText: "text-green-600",
+    tableHeaderBg: "bg-green-500 text-white",
+    grandTotalBg: "bg-green-100 text-green-900",
+  },
+  purple: {
+    logoText: "text-purple-600",
+    tableHeaderBg: "bg-purple-500 text-white",
+    grandTotalBg: "bg-purple-100 text-purple-900",
+  },
+  red: {
+    logoText: "text-red-600",
+    tableHeaderBg: "bg-red-500 text-white",
+    grandTotalBg: "bg-red-100 text-red-900",
+  },
+  orange: {
+    logoText: "text-orange-600",
+    tableHeaderBg: "bg-orange-500 text-white",
+    grandTotalBg: "bg-orange-100 text-orange-900",
+  },
+  // tambahkan purple, red, navy, orange sama seperti di atas
+};
+
+<ThemeSelector
+  currentTheme={currentTheme}
+  onThemeChange={setCurrentTheme}
+/>
+
+<Invoice
+  catalogItems={catalogItems}
+  themeStyle={themeStyles[currentTheme]} // 🔹 ini penting
+/>
+
 // ⬇️ TARUH MAPPING DI SINI
 const themeClasses: Record<Theme, string> = {
   blue: "bg-blue-50 text-blue-900",
   green: "bg-green-50 text-green-900",
   purple: "bg-purple-50 text-purple-900",
   red: "bg-red-50 text-red-900",
-  navy: "bg-blue-900 text-white",
   orange: "bg-orange-50 text-orange-900",
 };
+
+const [currentTheme, setCurrentTheme] = useState<Theme>("blue");
 
 const InvoiceApp = () => {
   const [currentTheme, setCurrentTheme] = useState<Theme>('blue');

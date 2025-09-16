@@ -20,7 +20,7 @@ export const InvoiceTable = ({ items, onDeleteItem, totalAmount }: InvoiceTableP
   return (
     <div className="my-8">
       <table className="w-full border-collapse">
-        <thead>
+        <thead className={themeStyle.tableHeaderBg}>
           <tr className="bg-invoice-table-header text-invoice-primary-foreground">
             <th className="border border-invoice-border p-2 lg:p-3 text-left font-medium text-xs lg:text-sm">NO.</th>
             <th className="border border-invoice-border p-2 lg:p-3 text-left font-medium text-xs lg:text-sm">NAMA BARANG / JASA</th>
