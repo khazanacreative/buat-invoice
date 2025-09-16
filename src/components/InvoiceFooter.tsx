@@ -38,7 +38,7 @@ export const InvoiceFooter = ({
             <strong>NB:</strong> Silahkan melakukan pembayaran melalui transfer ke:
           </p>
           {bankAccounts.map((acc, idx) => (
-            <div key={idx} className="flex flex-row flex-wrap sm:flex-row sm:items-center gap-1 text-sm mb-2 w-full">
+            <div key={idx} className="flex flex-row flex-wrap sm:flex-row sm:items-center gap-1 text-sm mb-1 w-full">
               <Input
                 value={acc.bankName}
                 onChange={e => {

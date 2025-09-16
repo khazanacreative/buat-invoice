@@ -90,53 +90,53 @@
     --destructive-foreground: 210 40% 98%;
   }
 
-  /* Theme Classes */
+  /* Theme Classes - Higher specificity to override :root */
   .theme-blue {
-    --invoice-primary: 217 91% 60%;
-    --invoice-secondary: 217 91% 95%;
-    --invoice-accent: 217 91% 85%;
-    --invoice-table-header: 217 91% 60%;
-    --invoice-table-row-even: 217 91% 97%;
+    --invoice-primary: 217 91% 60% !important;
+    --invoice-secondary: 217 91% 95% !important;
+    --invoice-accent: 217 91% 85% !important;
+    --invoice-table-header: 217 91% 60% !important;
+    --invoice-table-row-even: 217 91% 97% !important;
   }
 
   .theme-green {
-    --invoice-primary: 142 76% 36%;
-    --invoice-secondary: 142 76% 95%;
-    --invoice-accent: 142 76% 85%;
-    --invoice-table-header: 142 76% 36%;
-    --invoice-table-row-even: 142 76% 97%;
+    --invoice-primary: 142 76% 36% !important;
+    --invoice-secondary: 142 76% 95% !important;
+    --invoice-accent: 142 76% 85% !important;
+    --invoice-table-header: 142 76% 36% !important;
+    --invoice-table-row-even: 142 76% 97% !important;
   }
 
   .theme-purple {
-    --invoice-primary: 262 83% 58%;
-    --invoice-secondary: 262 83% 95%;
-    --invoice-accent: 262 83% 85%;
-    --invoice-table-header: 262 83% 58%;
-    --invoice-table-row-even: 262 83% 97%;
+    --invoice-primary: 262 83% 58% !important;
+    --invoice-secondary: 262 83% 95% !important; 
+    --invoice-accent: 262 83% 85% !important;
+    --invoice-table-header: 262 83% 58% !important;
+    --invoice-table-row-even: 262 83% 97% !important;
   }
 
   .theme-red {
-    --invoice-primary: 0 84% 60%;
-    --invoice-secondary: 0 84% 95%;
-    --invoice-accent: 0 84% 85%;
-    --invoice-table-header: 0 84% 60%;
-    --invoice-table-row-even: 0 84% 97%;
+    --invoice-primary: 0 84% 60% !important;
+    --invoice-secondary: 0 84% 95% !important;
+    --invoice-accent: 0 84% 85% !important;
+    --invoice-table-header: 0 84% 60% !important;
+    --invoice-table-row-even: 0 84% 97% !important;
   }
 
   .theme-navy {
-    --invoice-primary: 221 83% 53%;
-    --invoice-secondary: 221 83% 95%;
-    --invoice-accent: 221 83% 85%;
-    --invoice-table-header: 221 83% 53%;
-    --invoice-table-row-even: 221 83% 97%;
+    --invoice-primary: 221 83% 53% !important;
+    --invoice-secondary: 221 83% 95% !important;
+    --invoice-accent: 221 83% 85% !important;
+    --invoice-table-header: 221 83% 53% !important;
+    --invoice-table-row-even: 221 83% 97% !important;
   }
 
   .theme-orange {
-    --invoice-primary: 25 95% 53%;
-    --invoice-secondary: 25 95% 95%;
-    --invoice-accent: 25 95% 85%;
-    --invoice-table-header: 25 95% 53%;
-    --invoice-table-row-even: 25 95% 97%;
+    --invoice-primary: 25 95% 53% !important;
+    --invoice-secondary: 25 95% 95% !important;
+    --invoice-accent: 25 95% 85% !important;
+    --invoice-table-header: 25 95% 53% !important;
+    --invoice-table-row-even: 25 95% 97% !important;
   }
 
   * {
