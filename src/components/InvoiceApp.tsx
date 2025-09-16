@@ -4,7 +4,7 @@ import { Invoice } from './Invoice';
 import { ThemeSelector } from './ThemeSelector';
 import { ItemCatalog } from './ItemCatalog';
 
-export type Theme = 'blue' | 'green' | 'purple' | 'red' | 'navy' | 'orange';
+export type Theme = 'blue' | 'green' | 'purple' | 'red' | 'orange';
 
 export interface CatalogItem {
   id: string;
@@ -26,7 +26,6 @@ const themeStyles: Record<Theme, ThemeStyle> = {
   green:  { logoText: 'text-green-900', tableHeaderBg: 'bg-green-100', grandTotalBg: 'bg-green-500/30' },
   purple: { logoText: 'text-purple-900', tableHeaderBg: 'bg-purple-100', grandTotalBg: 'bg-purple-500/30' },
   red:    { logoText: 'text-red-900', tableHeaderBg: 'bg-red-100', grandTotalBg: 'bg-red-500/30' },
-  navy:   { logoText: 'text-white',    tableHeaderBg: 'bg-blue-800',  grandTotalBg: 'bg-blue-900/30' },
   orange: { logoText: 'text-orange-900',tableHeaderBg: 'bg-orange-100',grandTotalBg: 'bg-orange-500/30' },
 };
 
