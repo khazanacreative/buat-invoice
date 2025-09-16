@@ -147,7 +147,7 @@ export const ItemCatalog = ({ items, onAddItem, onDeleteItem, onAddMultipleItems
           </Button>
         </div>
         {/* Tombol download dan upload template XLS */}
-        <div className="flex flex-row gap-2 mt-4">
+        <div className="flex flex-col sm:flex-row gap-2 mt-4">
           <Button 
             variant="outline" 
             size="sm"
