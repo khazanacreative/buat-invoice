@@ -17,6 +17,7 @@ interface InvoiceHeaderProps {
   setTransactionId: (value: string) => void
   transactionDate: string
   setTransactionDate: (value: string) => void
+  headerClass: string
 }
 
 export const InvoiceHeader = ({
@@ -34,9 +35,10 @@ export const InvoiceHeader = ({
   setTransactionId,
   transactionDate,
   setTransactionDate,
+  headerClass,
 }: InvoiceHeaderProps) => {
   return (
-    <div className="space-y-8">
+    <div className={`space-y-8 p-4 rounded-lg ${headerClass}`}>
       {/* Company + Logo Row */}
       <div className="flex justify-between items-start">
         {/* Company Info */}
@@ -71,7 +73,7 @@ export const InvoiceHeader = ({
 
       {/* Invoice Title (dipindah ke bawah alamat, di atas customer) */}
       <div className="flex justify-center">
-        <h1 className="text-3xl font-bold text-invoice-primary">INVOICE</h1>
+        <h1 className={`text-3xl font-bold ${headerClass}`}>INVOICE</h1>
       </div>
 
       {/* Customer and Transaction Details */}
@@ -79,40 +81,40 @@ export const InvoiceHeader = ({
         {/* Kiri: Customer Details (selalu kiri) */}
         <div className="space-y-1 w-full sm:w-1/2">
           <div className="flex items-center gap-2">
-            <span className="font-medium text-sm min-w-[120px]">Nama Pelanggan:</span>
+            <span className="font-medium text-sm min-w-[120px] text-black">Nama Pelanggan:</span>
             <Input
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
               placeholder="Masukkan nama pelanggan"
-              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary text-black"
             />
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-medium text-sm min-w-[120px]">Alamat:</span>
+            <span className="font-medium text-sm min-w-[120px] text-black">Alamat:</span>
             <Input
               value={customerAddress}
               onChange={(e) => setCustomerAddress(e.target.value)}
               placeholder="Masukkan alamat pelanggan"
-              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary text-black"
             />
           </div>
           {/* Transaction Details: tampil di bawah customer hanya di mobile */}
           <div className="flex flex-col gap-1 mt-2 sm:hidden">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-sm min-w-[100px]">No Transaksi:</span>
+              <span className="font-medium text-sm min-w-[100px] text-black">No Transaksi:</span>
               <Input
                 value={transactionId}
                 onChange={(e) => setTransactionId(e.target.value)}
-                className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary w-full"
+                className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary w-full text-black"
               />
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-medium text-sm min-w-[100px]">Tanggal:</span>
+              <span className="font-medium text-sm min-w-[100px] text-black">Tanggal:</span>
               <Input
                 type="date"
                 value={transactionDate}
                 onChange={(e) => setTransactionDate(e.target.value)}
-                className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary w-full"
+                className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 focus-visible:ring-0 focus-visible:border-invoice-primary w-full text-black"
               />
             </div>
           </div>
@@ -120,20 +122,20 @@ export const InvoiceHeader = ({
         {/* Kanan: Transaction Details (hanya muncul di sm ke atas) */}
         <div className="hidden sm:flex flex-col space-y-1 text-right w-1/2">
           <div className="flex flex-row items-center gap-2 justify-end">
-            <span className="font-medium text-sm min-w-[100px]">No Transaksi:</span>
+            <span className="font-medium text-sm min-w-[100px] text-black">No Transaksi:</span>
             <Input
               value={transactionId}
               onChange={(e) => setTransactionId(e.target.value)}
-              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40 text-black"
             />
           </div>
           <div className="flex flex-row items-center gap-2 justify-end">
-            <span className="font-medium text-sm min-w-[100px]">Tanggal:</span>
+            <span className="font-medium text-sm min-w-[100px] text-black">Tanggal:</span>
             <Input
               type="date"
               value={transactionDate}
               onChange={(e) => setTransactionDate(e.target.value)}
-              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40"
+              className="h-7 text-sm border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-0 text-right focus-visible:ring-0 focus-visible:border-invoice-primary w-full sm:w-40 text-black"
             />
           </div>
         </div>

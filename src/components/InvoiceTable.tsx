@@ -6,9 +6,11 @@ interface InvoiceTableProps {
   items: InvoiceItem[];
   onDeleteItem: (id: string) => void;
   totalAmount: number;
+  tableHeaderClass: string;
+  totalBarClass: string;
 }
 
-export const InvoiceTable = ({ items, onDeleteItem, totalAmount }: InvoiceTableProps) => {
+export const InvoiceTable = ({ items, onDeleteItem, totalAmount, tableHeaderClass, totalBarClass }: InvoiceTableProps) => {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -21,7 +23,7 @@ export const InvoiceTable = ({ items, onDeleteItem, totalAmount }: InvoiceTableP
     <div className="my-8">
       <table className="w-full border-collapse">
         <thead>
-          <tr className="bg-invoice-table-header text-invoice-primary-foreground">
+          <tr className={tableHeaderClass}>
             <th className="border border-invoice-border p-2 lg:p-3 text-left font-medium text-xs lg:text-sm">NO.</th>
             <th className="border border-invoice-border p-2 lg:p-3 text-left font-medium text-xs lg:text-sm">NAMA BARANG / JASA</th>
             <th className="border border-invoice-border p-2 lg:p-3 text-left font-medium text-xs lg:text-sm">QTY.</th>
@@ -70,11 +72,11 @@ export const InvoiceTable = ({ items, onDeleteItem, totalAmount }: InvoiceTableP
           )}
         </tbody>
         <tfoot>
-          <tr className="bg-invoice-secondary">
-            <td colSpan={4} className="border border-invoice-border p-2 lg:p-3 text-right font-bold text-sm lg:text-base">
+          <tr className="bg-gray-50">
+            <td colSpan={4} className={`border border-invoice-border p-2 lg:p-3 text-right font-bold text-sm lg:text-base ${totalBarClass}`}>
               TOTAL
             </td>
-            <td className="border border-invoice-border p-2 lg:p-3 text-right font-bold text-invoice-primary text-sm lg:text-base">
+            <td className={`border border-invoice-border p-2 lg:p-3 text-right font-bold text-sm lg:text-base ${totalBarClass}`}>
               {formatCurrency(totalAmount)}
             </td>
             <td className="border border-invoice-border p-2 lg:p-3"></td>

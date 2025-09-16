@@ -13,12 +13,44 @@ export interface CatalogItem {
 }
 
 // ⬇️ TARUH MAPPING DI SINI
-const themeClasses: Record<Theme, string> = {
-  blue: "bg-blue-50 text-blue-900",
-  green: "bg-green-50 text-green-900",
-  purple: "bg-purple-50 text-purple-900",
-  red: "bg-red-50 text-red-900",
-  orange: "bg-orange-50 text-orange-900",
+interface ThemeClasses {
+  background: string;
+  header: string;
+  tableHeader: string;
+  totalBar: string;
+}
+
+const themeClasses: Record<Theme, ThemeClasses> = {
+  blue: {
+    background: "bg-white",
+    header: "text-blue-700",
+    tableHeader: "bg-blue-100 text-black",
+    totalBar: "text-blue-700"
+  },
+  green: {
+    background: "bg-white",
+    header: "text-green-700",
+    tableHeader: "bg-green-100 text-black",
+    totalBar: "text-green-700"
+  },
+  purple: {
+    background: "bg-white",
+    header: "text-purple-700",
+    tableHeader: "bg-purple-100 text-black",
+    totalBar: "text-purple-700"
+  },
+  red: {
+    background: "bg-white",
+    header: "text-red-700",
+    tableHeader: "bg-red-100 text-black",
+    totalBar: "text-red-700"
+  },
+  orange: {
+    background: "bg-white",
+    header: "text-orange-700",
+    tableHeader: "bg-orange-100 text-black",
+    totalBar: "text-orange-700"
+  }
 };
 
 const InvoiceApp = () => {
@@ -46,7 +78,7 @@ const InvoiceApp = () => {
   };
 
   return (
-    <div className={`min-h-screen ${themeClasses[currentTheme]}`}>
+    <div className={`min-h-screen ${themeClasses[currentTheme].background}`}>
       <header className="no-print bg-card border-b p-3 lg:p-4">
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
@@ -59,7 +91,11 @@ const InvoiceApp = () => {
       
       <main className="container mx-auto py-4 lg:py-8 px-4">
         <div className="space-y-6">
-          <Invoice catalogItems={catalogItems} />
+          <Invoice 
+            catalogItems={catalogItems} 
+            themeClasses={themeClasses[currentTheme]}
+            currentTheme={currentTheme}
+          />
           <ItemCatalog
             items={catalogItems}
             onAddItem={addCatalogItem}

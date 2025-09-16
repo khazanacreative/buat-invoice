@@ -7,6 +7,13 @@ import { InvoiceTable } from './InvoiceTable';
 import { InvoiceFooter } from './InvoiceFooter';
 import { AddItemForm } from './AddItemForm';
 import { CatalogItem } from './InvoiceApp';
+
+interface ThemeClasses {
+  background: string;
+  header: string;
+  tableHeader: string;
+  totalBar: string;
+}
 import { Printer, Plus, Share2 } from 'lucide-react';
   // Share PDF handler  
   const handleSharePDF = async () => {
@@ -55,7 +62,18 @@ export interface InvoiceItem {
   description?: string;
 }
 
-export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
+interface InvoiceProps {
+  catalogItems: CatalogItem[];
+  themeClasses: ThemeClasses;
+}
+
+interface InvoiceProps {
+  catalogItems: CatalogItem[];
+  themeClasses: ThemeClasses;
+  currentTheme: string;
+}
+
+export const Invoice = ({ catalogItems, themeClasses, currentTheme }: InvoiceProps) => {
   const { toast } = useToast();
   const [companyName, setCompanyName] = useState('');
   const [companyAddress, setCompanyAddress] = useState('');
@@ -129,9 +147,10 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
   return (
     <div className="space-y-4">
       {/* Invoice Container */}
-      <div className="invoice-container bg-card border-2 border-invoice-border rounded-lg p-2 lg:p-4 max-w-4xl mx-auto relative overflow-x-auto">
+      <div className={`invoice-container print-theme ${currentTheme} bg-card border-2 border-invoice-border rounded-lg p-2 lg:p-4 max-w-4xl mx-auto relative overflow-x-auto`}>
         {/* Header */}
         <InvoiceHeader
+          headerClass={themeClasses.header}
           companyName={companyName}
           setCompanyName={setCompanyName}
           companyAddress={companyAddress}
@@ -151,6 +170,8 @@ export const Invoice = ({ catalogItems }: { catalogItems: CatalogItem[] }) => {
         {/* Tabel Invoice */}
         <div className="pt-2 lg:pt-3">
           <InvoiceTable
+            tableHeaderClass={themeClasses.tableHeader}
+            totalBarClass={themeClasses.totalBar}
             items={items}
             onDeleteItem={handleDeleteItem}
             totalAmount={totalAmount}
