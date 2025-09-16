@@ -20,7 +20,7 @@ export const InvoiceTable = ({ items, onDeleteItem, totalAmount, tableHeaderClas
   };
 
   return (
-    <div className="my-8">
+    <div className="mt-4 mb-8">
       <table className="w-full border-collapse">
         <thead>
           <tr className={tableHeaderClass}>

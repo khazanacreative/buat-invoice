@@ -47,7 +47,7 @@ export const InvoiceFooter = ({
                   setBankAccounts(updated);
                 }}
                 placeholder="Bank"
-                className="flex-1 min-w-0 sm:w-20 border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+                className="flex-1 min-w-0 sm:w-20 border-none border-b border-muted-foreground/30 rounded-none bg-transparent py-0 px-1 focus-visible:ring-0 focus-visible:border-invoice-primary h-6"
               />
               <Input
                 value={acc.accountNumber}
@@ -57,7 +57,7 @@ export const InvoiceFooter = ({
                   setBankAccounts(updated);
                 }}
                 placeholder="No. Rek."
-                className="flex-1 min-w-0 sm:w-auto border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+                className="flex-1 min-w-0 sm:w-auto border-none border-b border-muted-foreground/30 rounded-none bg-transparent py-0 px-1 focus-visible:ring-0 focus-visible:border-invoice-primary h-6"
               />
               <span className="mx-1">a.n.</span>
               <Input
@@ -68,7 +68,7 @@ export const InvoiceFooter = ({
                   setBankAccounts(updated);
                 }}
                 placeholder="Nama Pemilik"
-                className="flex-1 min-w-0 sm:w-auto border-none border-b border-muted-foreground/30 rounded-none bg-transparent p-1 focus-visible:ring-0 focus-visible:border-invoice-primary"
+                className="flex-1 min-w-0 sm:w-auto border-none border-b border-muted-foreground/30 rounded-none bg-transparent py-0 px-1 focus-visible:ring-0 focus-visible:border-invoice-primary h-6"
               />
               {bankAccounts.length > 1 && (
                 <button type="button" className="text-xs text-red-500 ml-2" onClick={() => setBankAccounts(bankAccounts.filter((_, i) => i !== idx))}>Hapus</button>
