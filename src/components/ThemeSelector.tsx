@@ -11,6 +11,7 @@ const themes = [
   { value: 'green' as Theme, label: 'Corporate Green', color: 'bg-green-500' },
   { value: 'purple' as Theme, label: 'Modern Purple', color: 'bg-purple-500' },
   { value: 'red' as Theme, label: 'Elegant Red', color: 'bg-red-500' },
+  { value: 'navy' as Theme, label: 'Classic Navy', color: 'bg-blue-900' },
   { value: 'orange' as Theme, label: 'Creative Orange', color: 'bg-orange-500' },
 ];
 
