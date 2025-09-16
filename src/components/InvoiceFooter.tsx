@@ -38,7 +38,7 @@ export const InvoiceFooter = ({
             <strong>NB:</strong> Silahkan melakukan pembayaran melalui transfer ke:
           </p>
           {bankAccounts.map((acc, idx) => (
-            <div key={idx} className="flex flex-row flex-wrap sm:flex-row sm:items-center gap-1 text-sm mb-1 w-full">
+            <div key={idx} className="flex flex-row flex-wrap sm:flex-row sm:items-center gap-1 text-sm mb-0.5 w-full">
               <Input
                 value={acc.bankName}
                 onChange={e => {
@@ -89,15 +89,9 @@ export const InvoiceFooter = ({
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Catatan tambahan..."
-            className={`resize-none border-none bg-transparent p-1 focus-visible:ring-0 text-sm${!notes ? ' print:hidden' : ''}`}
+            className="resize-none border-none bg-transparent p-1 focus-visible:ring-0 text-sm"
             rows={3}
           />
-          {/* Tampilkan catatan di print hanya jika ada isinya */}
-          {notes && (
-            <div className="hidden print:block mt-2 text-sm">
-              <strong>Catatan:</strong> {notes}
-            </div>
-          )}
         </div>
       </div>
 

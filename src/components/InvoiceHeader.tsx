@@ -38,11 +38,11 @@ export const InvoiceHeader = ({
   headerClass,
 }: InvoiceHeaderProps) => {
   return (
-    <div className={`space-y-8 p-4 rounded-lg ${headerClass}`}>
+    <div className={`space-y-6 p-4 rounded-lg ${headerClass}`}>
       {/* Company + Logo Row */}
       <div className="flex justify-between items-start">
         {/* Company Info */}
-        <div className="space-y-2 w-3/5">
+        <div className="space-y-1 w-3/5">
           <Input
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
@@ -99,7 +99,7 @@ export const InvoiceHeader = ({
             />
           </div>
           {/* Transaction Details: tampil di bawah customer hanya di mobile */}
-          <div className="flex flex-col gap-1 mt-2 sm:hidden">
+          <div className="flex flex-col gap-0.5 mt-1 sm:hidden">
             <div className="flex items-center gap-2">
               <span className="font-medium text-sm min-w-[100px] text-black">No Transaksi:</span>
               <Input
