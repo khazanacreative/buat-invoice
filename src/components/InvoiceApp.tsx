@@ -3,7 +3,7 @@ import { Invoice } from './Invoice';
 import { ThemeSelector } from './ThemeSelector';
 import { ItemCatalog } from './ItemCatalog';
 
-export type Theme = 'blue' | 'green' | 'purple' | 'red' | 'navy' | 'orange';
+export type Theme = 'blue' | 'green' | 'purple' | 'red' | 'orange';
 
 export interface CatalogItem {
   id: string;
@@ -18,7 +18,6 @@ const themeClasses: Record<Theme, string> = {
   green: "bg-green-50 text-green-900",
   purple: "bg-purple-50 text-purple-900",
   red: "bg-red-50 text-red-900",
-  navy: "bg-blue-900 text-white",
   orange: "bg-orange-50 text-orange-900",
 };
 

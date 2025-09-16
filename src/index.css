@@ -4,8 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Invoice Application Design System with Multiple Color Themes */
-
+/* ================================
+   Invoice Application Theme System
+   ================================ */
 @layer base {
   :root {
     /* Base colors */
@@ -24,7 +25,7 @@
     --destructive-foreground: 210 40% 98%;
     --radius: 0.5rem;
 
-    /* Professional Blue Theme (Default) */
+    /* Default Theme (Professional Blue) */
     --invoice-primary: 217 91% 60%;
     --invoice-primary-foreground: 0 0% 100%;
     --invoice-secondary: 217 91% 95%;
@@ -33,40 +34,30 @@
     --invoice-table-row-even: 217 91% 97%;
     --invoice-table-row-odd: 0 0% 100%;
     --invoice-border: 217 32% 85%;
-    
+
     /* Success/Add button */
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
-    
-    /* Theme variants - Corporate Green */
+
+    /* Theme variants */
     --theme-green-primary: 142 76% 36%;
     --theme-green-secondary: 142 76% 95%;
     --theme-green-accent: 142 76% 85%;
     --theme-green-table-header: 142 76% 36%;
     --theme-green-table-even: 142 76% 97%;
-    
-    /* Theme variants - Modern Purple */
+
     --theme-purple-primary: 262 83% 58%;
     --theme-purple-secondary: 262 83% 95%;
     --theme-purple-accent: 262 83% 85%;
     --theme-purple-table-header: 262 83% 58%;
     --theme-purple-table-even: 262 83% 97%;
-    
-    /* Theme variants - Elegant Red */
+
     --theme-red-primary: 0 84% 60%;
     --theme-red-secondary: 0 84% 95%;
     --theme-red-accent: 0 84% 85%;
     --theme-red-table-header: 0 84% 60%;
     --theme-red-table-even: 0 84% 97%;
-    
-    /* Theme variants - Classic Navy */
-    --theme-navy-primary: 221 83% 53%;
-    --theme-navy-secondary: 221 83% 95%;
-    --theme-navy-accent: 221 83% 85%;
-    --theme-navy-table-header: 221 83% 53%;
-    --theme-navy-table-even: 221 83% 97%;
-    
-    /* Theme variants - Creative Orange */
+
     --theme-orange-primary: 25 95% 53%;
     --theme-orange-secondary: 25 95% 95%;
     --theme-orange-accent: 25 95% 85%;
@@ -74,6 +65,9 @@
     --theme-orange-table-even: 25 95% 97%;
   }
 
+  /* =================
+     Dark Mode Support
+     ================= */
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -90,8 +84,10 @@
     --destructive-foreground: 210 40% 98%;
   }
 
-  /* Theme Classes - Higher specificity to override :root */
-  body .theme-blue {
+  /* ===================
+     Theme Class Mapping
+     =================== */
+  body.theme-blue {
     --invoice-primary: 217 91% 60%;
     --invoice-secondary: 217 91% 95%;
     --invoice-accent: 217 91% 85%;
@@ -99,7 +95,7 @@
     --invoice-table-row-even: 217 91% 97%;
   }
 
-  body .theme-green {
+  body.theme-green {
     --invoice-primary: 142 76% 36%;
     --invoice-secondary: 142 76% 95%;
     --invoice-accent: 142 76% 85%;
@@ -107,7 +103,7 @@
     --invoice-table-row-even: 142 76% 97%;
   }
 
-  body .theme-purple {
+  body.theme-purple {
     --invoice-primary: 262 83% 58%;
     --invoice-secondary: 262 83% 95%;
     --invoice-accent: 262 83% 85%;
@@ -115,7 +111,7 @@
     --invoice-table-row-even: 262 83% 97%;
   }
 
-  body .theme-red {
+  body.theme-red {
     --invoice-primary: 0 84% 60%;
     --invoice-secondary: 0 84% 95%;
     --invoice-accent: 0 84% 85%;
@@ -123,15 +119,7 @@
     --invoice-table-row-even: 0 84% 97%;
   }
 
-  body .theme-navy {
-    --invoice-primary: 221 83% 53%;
-    --invoice-secondary: 221 83% 95%;
-    --invoice-accent: 221 83% 85%;
-    --invoice-table-header: 221 83% 53%;
-    --invoice-table-row-even: 221 83% 97%;
-  }
-
-  body .theme-orange {
+  body.theme-orange {
     --invoice-primary: 25 95% 53%;
     --invoice-secondary: 25 95% 95%;
     --invoice-accent: 25 95% 85%;
@@ -139,6 +127,9 @@
     --invoice-table-row-even: 25 95% 97%;
   }
 
+  /* =====================
+     Base & Print Styling
+     ===================== */
   * {
     @apply border-border;
   }
@@ -147,24 +138,26 @@
     @apply bg-background text-foreground font-ubuntu;
   }
 
-  /* Print styles */
   @media print {
     .no-print {
       display: none !important;
     }
-    
+
     .invoice-container {
       border: none !important;
       box-shadow: none !important;
       margin: 0 !important;
       padding: 20px !important;
     }
-    
+
     .dashed-border {
       border: none !important;
     }
-    
-    input[type="text"], input[type="date"], input[type="number"], textarea {
+
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    textarea {
       border: none !important;
       outline: none !important;
       background: transparent !important;
