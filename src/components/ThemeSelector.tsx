@@ -18,7 +18,7 @@ const themes = [
 export const ThemeSelector = ({ currentTheme, onThemeChange }: ThemeSelectorProps) => {
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
-      <span className="text-sm font-medium text-foreground">Tema Branding:</span>
+      <span className="text-sm font-medium text-foreground">Pilih Tema:</span>
       <Select value={currentTheme} onValueChange={onThemeChange}>
         <SelectTrigger className="w-48">
           <SelectValue />
