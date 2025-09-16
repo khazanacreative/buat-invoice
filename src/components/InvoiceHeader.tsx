@@ -3,20 +3,21 @@ import { Textarea } from '@/components/ui/textarea'
 import { Upload } from 'lucide-react'
 
 interface InvoiceHeaderProps {
-  companyName: string
-  setCompanyName: (value: string) => void
-  companyAddress: string
-  setCompanyAddress: (value: string) => void
-  logo: string | null
-  onLogoClick: () => void
-  customerName: string
-  setCustomerName: (value: string) => void
-  customerAddress: string
-  setCustomerAddress: (value: string) => void
-  transactionId: string
-  setTransactionId: (value: string) => void
-  transactionDate: string
-  setTransactionDate: (value: string) => void
+  companyName: string;
+  setCompanyName: (v: string) => void;
+  companyAddress: string;
+  setCompanyAddress: (v: string) => void;
+  logo: string | null;
+  onLogoClick: () => void;
+  customerName: string;
+  setCustomerName: (v: string) => void;
+  customerAddress: string;
+  setCustomerAddress: (v: string) => void;
+  transactionId: string;
+  setTransactionId: (v: string) => void;
+  transactionDate: string;
+  setTransactionDate: (v: string) => void;
+  themeColor: string; // 🔹 tambahan
 }
 
 export const InvoiceHeader = ({
@@ -34,6 +35,7 @@ export const InvoiceHeader = ({
   setTransactionId,
   transactionDate,
   setTransactionDate,
+  themeColor,
 }: InvoiceHeaderProps) => {
   return (
     <div className="space-y-8">
@@ -71,7 +73,12 @@ export const InvoiceHeader = ({
 
       {/* Invoice Title (dipindah ke bawah alamat, di atas customer) */}
       <div className="flex justify-center">
-        <h1 className="text-3xl font-bold text-invoice-primary">INVOICE</h1>
+        <h1
+          className="text-3xl font-bold"
+          style={{ color: themeColor }} // 🔹 warna dari state Invoice.tsx
+        >
+          INVOICE
+        </h1>
       </div>
 
       {/* Customer and Transaction Details */}

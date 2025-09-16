@@ -6,9 +6,10 @@ interface InvoiceTableProps {
   items: InvoiceItem[];
   onDeleteItem: (id: string) => void;
   totalAmount: number;
+  themeColor: string; // 🔹 tambahan
 }
 
-export const InvoiceTable = ({ items, onDeleteItem, totalAmount }: InvoiceTableProps) => {
+export const InvoiceTable = ({ items, onDeleteItem, totalAmount, themeColor }: InvoiceTableProps) => {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -21,7 +22,9 @@ export const InvoiceTable = ({ items, onDeleteItem, totalAmount }: InvoiceTableP
     <div className="my-8">
       <table className="w-full border-collapse">
         <thead>
-          <tr className="bg-invoice-table-header text-invoice-primary-foreground">
+          <tr
+            style={{ backgroundColor: themeColor, color: "white" }} // 🔹 Header ikut tema
+          >
             <th className="border border-invoice-border p-2 lg:p-3 text-left font-medium text-xs lg:text-sm">NO.</th>
             <th className="border border-invoice-border p-2 lg:p-3 text-left font-medium text-xs lg:text-sm">NAMA BARANG / JASA</th>
             <th className="border border-invoice-border p-2 lg:p-3 text-left font-medium text-xs lg:text-sm">QTY.</th>
@@ -33,7 +36,10 @@ export const InvoiceTable = ({ items, onDeleteItem, totalAmount }: InvoiceTableP
         <tbody>
           {items.length === 0 ? (
             <tr>
-              <td colSpan={6} className="border border-invoice-border p-6 lg:p-8 text-center text-muted-foreground text-sm">
+              <td
+                colSpan={6}
+                className="border border-invoice-border p-6 lg:p-8 text-center text-muted-foreground text-sm"
+              >
                 Belum ada item. Klik "Tambah Item" untuk menambahkan.
               </td>
             </tr>
@@ -70,11 +76,19 @@ export const InvoiceTable = ({ items, onDeleteItem, totalAmount }: InvoiceTableP
           )}
         </tbody>
         <tfoot>
-          <tr className="bg-invoice-secondary">
-            <td colSpan={4} className="border border-invoice-border p-2 lg:p-3 text-right font-bold text-sm lg:text-base">
+          <tr
+            style={{ backgroundColor: themeColor, opacity: 0.3 }} // 🔹 Grand total bar versi muda
+          >
+            <td
+              colSpan={4}
+              className="border border-invoice-border p-2 lg:p-3 text-right font-bold text-sm lg:text-base"
+            >
               TOTAL
             </td>
-            <td className="border border-invoice-border p-2 lg:p-3 text-right font-bold text-invoice-primary text-sm lg:text-base">
+            <td
+              className="border border-invoice-border p-2 lg:p-3 text-right font-bold text-sm lg:text-base"
+              style={{ color: themeColor }} // 🔹 Angka total pakai warna solid
+            >
               {formatCurrency(totalAmount)}
             </td>
             <td className="border border-invoice-border p-2 lg:p-3"></td>
