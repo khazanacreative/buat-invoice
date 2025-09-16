@@ -70,9 +70,9 @@ export const InvoiceHeader = ({
       </div>
 
       {/* Invoice Title (dipindah ke bawah alamat, di atas customer) */}
-      <h1 className={`text-3xl font-bold ${themeStyle.logoText}`}>
-        INVOICE
-      </h1>
+      <div className="flex justify-center">
+        <h1 className="text-3xl font-bold text-invoice-primary">INVOICE</h1>
+      </div>
 
       {/* Customer and Transaction Details */}
       <div className="flex flex-col sm:flex-row sm:justify-between items-start gap-4">
