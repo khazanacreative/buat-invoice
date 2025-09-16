@@ -14,9 +14,10 @@ interface ItemCatalogProps {
   items: CatalogItem[];
   onAddItem: (item: Omit<CatalogItem, 'id'>) => void;
   onDeleteItem: (id: string) => void;
+  onAddMultipleItems: (items: Omit<CatalogItem, 'id'>[]) => void;
 }
 
-export const ItemCatalog = ({ items, onAddItem, onDeleteItem }: ItemCatalogProps) => {
+export const ItemCatalog = ({ items, onAddItem, onDeleteItem, onAddMultipleItems }: ItemCatalogProps) => {
   const { toast } = useToast();
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
@@ -40,23 +41,24 @@ export const ItemCatalog = ({ items, onAddItem, onDeleteItem }: ItemCatalogProps
         
         // Format: [{ Nama, Deskripsi, Harga }]
         if (Array.isArray(json)) {
-          let importedCount = 0;
+          const validItems: Omit<CatalogItem, 'id'>[] = [];
+          
           // @ts-ignore
           json.forEach((row: any) => {
             if (row.Nama && row.Harga) {
-              onAddItem({
+              validItems.push({
                 name: row.Nama,
                 price: Number(row.Harga),
                 description: row.Deskripsi || '',
               });
-              importedCount++;
             }
           });
           
-          if (importedCount > 0) {
+          if (validItems.length > 0) {
+            onAddMultipleItems(validItems);
             toast({
               title: "Import berhasil",
-              description: `${importedCount} item berhasil diimpor dari Excel`,
+              description: `${validItems.length} item berhasil diimpor dari Excel`,
             });
           } else {
             toast({

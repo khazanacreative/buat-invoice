@@ -24,6 +24,14 @@ const InvoiceApp = () => {
     setCatalogItems([...catalogItems, newItem]);
   };
 
+  const addMultipleCatalogItems = (items: Omit<CatalogItem, 'id'>[]) => {
+    const newItems: CatalogItem[] = items.map((item, index) => ({
+      ...item,
+      id: (Date.now() + index).toString(),
+    }));
+    setCatalogItems(prev => [...prev, ...newItems]);
+  };
+
   const deleteCatalogItem = (id: string) => {
     setCatalogItems(catalogItems.filter(item => item.id !== id));
   };
@@ -47,6 +55,7 @@ const InvoiceApp = () => {
             items={catalogItems}
             onAddItem={addCatalogItem}
             onDeleteItem={deleteCatalogItem}
+            onAddMultipleItems={addMultipleCatalogItems}
           />
         </div>
       </main>
